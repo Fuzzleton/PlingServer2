@@ -13,25 +13,6 @@ using System.Threading.Tasks;
 using System.Web;
 namespace PlingAgentCore
 {
-    class Program
-    {
-        static int Main(string[] args)
-        {
-            HttpServer httpServer;
-            if (args.GetLength(0) > 0)
-            {
-                httpServer = new MyHttpServer(Convert.ToInt16(args[0]));
-            }
-            else {
-                httpServer = new MyHttpServer(8080);
-            }
-            Thread thread = new Thread(new ThreadStart(httpServer.listen));
-            thread.Start();
-            return 0;
-        }
-
-
-    }
 
     public class HttpProcessor
     {
@@ -312,7 +293,7 @@ namespace PlingAgentCore
             String request = Uri.UnescapeDataString(text);
             request = request.Substring(1);
             Console.WriteLine(request);
-            String answer = RequestHandler.JSONHandle(request);
+            String answer = RequestHandler.HandleRequest(request);
 
             return answer;
         }
